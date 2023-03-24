@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InputOfferItem, OfferItem } from './offer.model';
+import { InputOfferItemDTO, OfferItem } from './offer.model';
 import { InjectModel } from '@nestjs/mongoose/dist';
 import { Model } from 'mongoose';
 import { Request } from 'express';
@@ -10,8 +10,8 @@ export class OfferService {
     @InjectModel('Offer') private readonly offerModel: Model<OfferItem>,
   ) {}
 
-  async insertOfferItem(file: any, req: Request): Promise<string> {
-    const offerItem: InputOfferItem = req.body;
+  async insertOfferItem(req: Request): Promise<string> {
+    const offerItem: InputOfferItemDTO = req.body;
     const imagePath = this.generateImagePath(
       req.file.filename,
       req.get('host'),
@@ -37,8 +37,22 @@ export class OfferService {
     return item;
   }
 
-  async updateOfferItem(id: string, offerItem: InputOfferItem) {
+  async updateOfferItem(id: string, req: Request) {
+    const offerItem: InputOfferItemDTO = req.body;
     const updatedItem = await this.findItem(id);
+
+    let imagePath: string;
+
+    if (req.file) {
+      imagePath = this.generateImagePath(
+        req.file.filename,
+        req.get('host'),
+        req.protocol,
+      );
+    } else {
+      imagePath = updatedItem.imagePath;
+    }
+
     updatedItem.name = offerItem?.name || updatedItem.name;
     updatedItem.itemPathId =
       this.generatePathId(offerItem.name) || updatedItem.itemPathId;
@@ -50,7 +64,7 @@ export class OfferService {
       offerItem?.shortDescription || updatedItem.shortDescription;
     updatedItem.technicalCondition =
       offerItem?.technicalCondition || updatedItem.technicalCondition;
-    updatedItem.imagePath = '' || updatedItem.imagePath;
+    updatedItem.imagePath = imagePath || updatedItem.imagePath;
     updatedItem.minRentalPeriod =
       offerItem?.minRentalPeriod || updatedItem.minRentalPeriod;
     updatedItem.rentOnlineURL =

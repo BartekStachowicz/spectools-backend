@@ -27,7 +27,7 @@ export interface OfferItem extends mongoose.Document {
   rentOnlineURL: string;
 }
 
-export interface InputOfferItem {
+export interface InputOfferItemDTO {
   name: string;
   priceRent: number;
   priceCaution: number;

@@ -1,7 +1,6 @@
 import {
   Controller,
   Post,
-  Body,
   Get,
   Param,
   Patch,
@@ -9,25 +8,27 @@ import {
   UseInterceptors,
   Req,
 } from '@nestjs/common';
-import { UploadedFile } from '@nestjs/common/decorators';
+import { UploadedFile, UseGuards } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
+import { JwtGuard } from 'src/auth/jwt.guard';
 import { multerOptions } from 'src/multer.config';
-import { InputOfferItem, OfferItem } from './offer.model';
+import { OfferItem } from './offer.model';
 import { OfferService } from './offer.service';
 
-@Controller('api/offers')
+@Controller('offers')
 export class OfferController {
   constructor(private readonly offerService: OfferService) {}
 
   //new offer item
+  @UseGuards(JwtGuard)
   @Post()
   @UseInterceptors(FileInterceptor('image', multerOptions))
   async insertOfferItem(
     @Req() req: Request,
     @UploadedFile() file: any,
-  ): Promise<{ [k: string]: string }> {
-    const databaseItemID = await this.offerService.insertOfferItem(file, req);
+  ): Promise<{ id: string }> {
+    const databaseItemID = await this.offerService.insertOfferItem(req);
     return { id: databaseItemID };
   }
 
@@ -46,16 +47,15 @@ export class OfferController {
   }
 
   //update offer item
+  @UseGuards(JwtGuard)
   @Patch(':id')
-  async updateOfferItem(
-    @Param('id') id: string,
-    @Body() offerItem: InputOfferItem,
-  ) {
-    await this.offerService.updateOfferItem(id, offerItem);
+  async updateOfferItem(@Param('id') id: string, @Req() req: Request) {
+    await this.offerService.updateOfferItem(id, req);
     return null;
   }
 
   //delete offer item
+  @UseGuards(JwtGuard)
   @Delete(':id')
   async deleteOfferItem(@Param('id') id: string) {
     await this.offerService.deleteOfferItem(id);

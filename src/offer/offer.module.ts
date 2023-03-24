@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose/dist';
+
 import { OfferController } from './offer.controller';
 import { OfferSchema } from './offer.model';
 import { OfferService } from './offer.service';

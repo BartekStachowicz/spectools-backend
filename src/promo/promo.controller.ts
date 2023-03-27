@@ -18,7 +18,7 @@ export class PromoController {
   constructor(private readonly promoService: PromoService) {}
 
   @UseGuards(JwtGuard)
-  @Patch('add-first')
+  @Patch()
   @UseInterceptors(FilesInterceptor('images', 2, multerOptions))
   async insertPromoItem(
     @Req() req: Request,

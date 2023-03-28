@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
 import { PromoModule } from './promo/promo.module';
 import { CounterModule } from './counter/counter.module';
+import { CalendarModule } from './calendar/calendar.module';
 
 const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
 const MONGO_DB_USER = process.env.MONGO_DB_USER;
@@ -27,6 +28,7 @@ const MONGO_DB_DATABASE = process.env.MONGO_DB_DATABASE_DEV;
     UsersModule,
     PromoModule,
     CounterModule,
+    CalendarModule,
   ],
   controllers: [AppController],
   providers: [],

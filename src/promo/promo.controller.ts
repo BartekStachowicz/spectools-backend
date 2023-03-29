@@ -19,13 +19,14 @@ export class PromoController {
 
   @UseGuards(JwtGuard)
   @Patch()
-  @UseInterceptors(FilesInterceptor('images', 2, multerOptions))
+  @UseInterceptors(FilesInterceptor('images[]', 2, multerOptions))
   async insertPromoItem(
     @Req() req: Request,
     @UploadedFiles() files: any[],
   ): Promise<{ id: string }> {
     const isExist = await this.promoService.findByName('main_promo');
-
+    console.log(req);
+    console.log(files);
     if (!isExist) {
       const databaseItemID = await this.promoService.insertPromoItem(
         files,

@@ -11,6 +11,7 @@ export const OfferSchema = new mongoose.Schema({
   imagePath: { type: String, require: true },
   minRentalPeriod: { type: String, require: true },
   rentOnlineURL: { type: String, require: true },
+  calendarFlag: { type: Boolean, require: true },
 });
 
 export interface OfferItem extends mongoose.Document {
@@ -25,6 +26,7 @@ export interface OfferItem extends mongoose.Document {
   imagePath: string;
   minRentalPeriod: string;
   rentOnlineURL: string;
+  calendarFlag: boolean;
 }
 
 export interface InputOfferItemDTO {
@@ -36,5 +38,6 @@ export interface InputOfferItemDTO {
   technicalCondition: string;
   minRentalPeriod: string;
   rentOnlineURL: string;
-  image: any;
+  calendarFlag: boolean;
+  image: File;
 }

@@ -8,7 +8,7 @@ import {
   UseInterceptors,
   Req,
 } from '@nestjs/common';
-import { UploadedFile, UseGuards } from '@nestjs/common/decorators';
+import { UseGuards } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
 import { JwtGuard } from 'src/auth/jwt.guard';
@@ -24,19 +24,31 @@ export class OfferController {
   @UseGuards(JwtGuard)
   @Post()
   @UseInterceptors(FileInterceptor('image', multerOptions))
-  async insertOfferItem(
-    @Req() req: Request,
-    @UploadedFile() file: any,
-  ): Promise<{ id: string }> {
+  async insertOfferItem(@Req() req: Request): Promise<{ id: string }> {
     const databaseItemID = await this.offerService.insertOfferItem(req);
     return { id: databaseItemID };
   }
 
   //get all offer items
   @Get()
-  async getOffer(): Promise<OfferItem[]> {
+  async getOffer() {
     const offer = await this.offerService.getOffer();
-    return offer;
+    return offer.map((item) => {
+      return {
+        id: item._id,
+        name: item.name,
+        itemPathId: item.itemPathId,
+        priceRent: item.priceRent,
+        priceCaution: item.priceCaution,
+        description: item.description,
+        shortDescription: item.shortDescription,
+        technicalCondition: item.technicalCondition,
+        imagePath: item.imagePath,
+        minRentalPeriod: item.minRentalPeriod,
+        rentOnlineURL: item.rentOnlineURL,
+        calendarFlag: item.calendarFlag,
+      };
+    });
   }
 
   //get one offer item
@@ -50,8 +62,9 @@ export class OfferController {
   @UseGuards(JwtGuard)
   @Patch(':id')
   async updateOfferItem(@Param('id') id: string, @Req() req: Request) {
+    console.log(req.body);
     await this.offerService.updateOfferItem(id, req);
-    return null;
+    return true;
   }
 
   //delete offer item
@@ -59,6 +72,6 @@ export class OfferController {
   @Delete(':id')
   async deleteOfferItem(@Param('id') id: string) {
     await this.offerService.deleteOfferItem(id);
-    return null;
+    return true;
   }
 }

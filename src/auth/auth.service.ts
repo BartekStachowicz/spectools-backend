@@ -19,12 +19,14 @@ export class AuthService {
     return passwordHashed;
   }
 
-  async login(user: ExistingUserDTO): Promise<{ token: string } | null> {
+  async login(
+    user: ExistingUserDTO,
+  ): Promise<{ token: string; expiresIn: number; userId: string } | null> {
     const { username, password } = user;
     const existingUser = await this.isValidate(username, password);
     if (!existingUser) return null;
     const jwt = await this.jwtService.signAsync({ user });
-    return { token: jwt };
+    return { token: jwt, expiresIn: 14400, userId: existingUser.id };
   }
 
   async isPasswordTrue(

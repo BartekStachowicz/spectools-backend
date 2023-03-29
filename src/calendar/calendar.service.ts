@@ -27,6 +27,10 @@ export class CalendarService {
     }
   }
 
+  async getAllEvents() {
+    return this.calendarModel.find();
+  }
+
   async findByName(idItem: string): Promise<any> {
     return this.calendarModel.findOne({ idItem });
   }

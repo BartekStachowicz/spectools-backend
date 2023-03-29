@@ -37,7 +37,7 @@ export class PromoService {
     let imagePath1: string;
     let imagePath2: string;
 
-    if (files[0]) {
+    if (files && files[0]) {
       imagePath1 = this.generateImagePath(
         files[0].filename,
         req.get('host'),
@@ -47,7 +47,7 @@ export class PromoService {
       imagePath1 = updatedItem.imagePath1;
     }
 
-    if (files[1]) {
+    if (files && files[1]) {
       imagePath2 = this.generateImagePath(
         files[1].filename,
         req.get('host'),
@@ -59,8 +59,12 @@ export class PromoService {
 
     updatedItem.text1 = req.body?.text1 || updatedItem.text1;
     updatedItem.text2 = req.body?.text2 || updatedItem.text2;
-    updatedItem.imagePath1 = imagePath1 || updatedItem.imagePath1;
-    updatedItem.imagePath2 = imagePath2 || updatedItem.imagePath2;
+    updatedItem.imagePath1 = req.body.imagePath1
+      ? req.body.imagePath1
+      : imagePath1;
+    updatedItem.imagePath2 = req.body.imagePath2
+      ? req.body.imagePath2
+      : imagePath2;
 
     updatedItem.save();
   }

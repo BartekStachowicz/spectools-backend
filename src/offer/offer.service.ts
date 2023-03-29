@@ -29,6 +29,7 @@ export class OfferService {
 
   async getOffer(): Promise<OfferItem[]> {
     const offer = await this.offerModel.find().exec();
+
     return offer;
   }
 
@@ -69,6 +70,8 @@ export class OfferService {
       offerItem?.minRentalPeriod || updatedItem.minRentalPeriod;
     updatedItem.rentOnlineURL =
       offerItem?.rentOnlineURL || updatedItem.rentOnlineURL;
+    updatedItem.calendarFlag =
+      offerItem?.calendarFlag || updatedItem.calendarFlag;
     updatedItem.save();
   }
 

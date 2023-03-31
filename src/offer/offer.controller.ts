@@ -60,9 +60,10 @@ export class OfferController {
 
   //update offer item
   @UseGuards(JwtGuard)
+  @UseInterceptors(FileInterceptor('image', multerOptions))
   @Patch(':id')
   async updateOfferItem(@Param('id') id: string, @Req() req: Request) {
-    console.log(req.body);
+    console.log(req);
     await this.offerService.updateOfferItem(id, req);
     return true;
   }

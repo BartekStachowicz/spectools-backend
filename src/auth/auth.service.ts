@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
 import { UsersService } from 'src/users/users.service';
@@ -40,11 +40,15 @@ export class AuthService {
     username: string,
     password: string,
   ): Promise<UserInfo | null> {
-    const user = await this.usersService.findByName(username);
-    const isExisting = !!user;
-    const isPasswordTrue = await this.isPasswordTrue(user.password, password);
-    if (!isPasswordTrue || !isExisting) return null;
+    try {
+      const user = await this.usersService.findByName(username);
+      const isExisting = !!user;
+      const isPasswordTrue = await this.isPasswordTrue(user.password, password);
+      if (!isPasswordTrue || !isExisting) return null;
 
-    return this.usersService.getUserInfo(user);
+      return this.usersService.getUserInfo(user);
+    } catch {
+      throw new UnauthorizedException('Invalid password or username!');
+    }
   }
 }

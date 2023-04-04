@@ -34,7 +34,6 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.env
 .eslintrc.js
 assets/generator-karcher-pgg-3-1-1680083698136.jpg
 assets/glebogryzarka-cedrus-gl03pro-1680103387584.jpg

@@ -1,3 +1,4 @@
+clear
 # compiled output
 /dist
 /node_modules
@@ -84,3 +85,5 @@ assets/wiertnica-kaaz-ag-500-1680266967244.jpg
 assets/zageszczarka-cedrus-zg-2-1680266861205.jpg
 assets/zageszczarka-cedrus-zg-06-1680267059476.jpg
 assets/zageszczarka-wacker-neuson-bs50-2-1680267113098.jpg
+scripts/zip_code.sh
+spectools-backend.zip

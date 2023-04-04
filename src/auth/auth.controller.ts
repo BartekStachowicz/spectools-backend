@@ -7,7 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { ExistingUserDTO } from 'src/users/users.model';
+import { ExistingUserDTO } from '../users/users.model';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 

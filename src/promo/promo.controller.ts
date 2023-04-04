@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { multerOptions } from 'src/multer.config';
+import { multerOptions } from '../multer.config';
 import { PromoService } from './promo.service';
-import { JwtGuard } from 'src/auth/jwt.guard';
+import { JwtGuard } from '../auth/jwt.guard';
 
 @Controller('promo')
 export class PromoController {

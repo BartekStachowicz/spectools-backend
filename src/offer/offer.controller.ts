@@ -11,8 +11,8 @@ import {
 import { UseGuards } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
-import { JwtGuard } from 'src/auth/jwt.guard';
-import { multerOptions } from 'src/multer.config';
+import { JwtGuard } from '../auth/jwt.guard';
+import { multerOptions } from '../multer.config';
 import { OfferItem } from './offer.model';
 import { OfferService } from './offer.service';
 

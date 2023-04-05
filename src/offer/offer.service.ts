@@ -112,7 +112,7 @@ export class OfferService {
   private generatePathId(name: string): string {
     const pathId = name
       .toLowerCase()
-      // .replaceAll('/', ' ')
+      .replaceAll('/', ' ')
       // .replaceAll('#', ' ')
       // .replaceAll('?', ' ')
       // .replaceAll('!', ' ')

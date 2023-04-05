@@ -9,7 +9,6 @@ import { AppController } from './app.controller';
 import { PromoModule } from './promo/promo.module';
 import { CounterModule } from './counter/counter.module';
 import { CalendarModule } from './calendar/calendar.module';
-import { join } from 'path';
 
 const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
 const MONGO_DB_USER = process.env.MONGO_DB_USER;
@@ -22,8 +21,8 @@ const MONGO_DB_DATABASE = process.env.MONGO_DB_DATABASE_DEV;
       `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@cluster0.6eelvtt.mongodb.net/${MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
     ),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..'),
-      // serveRoot: '/assets',
+      rootPath: 'assets',
+      serveRoot: '/assets',
     }),
     AuthModule,
     UsersModule,

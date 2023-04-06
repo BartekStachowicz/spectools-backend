@@ -15,7 +15,6 @@ export class OfferService {
     const imagePath = this.generateImagePath(
       req.file.filename,
       req.get('host'),
-      req.protocol,
     );
     const itemPathId = this.generatePathId(offerItem.name);
     const newOfferItem = new this.offerModel({
@@ -45,11 +44,7 @@ export class OfferService {
     let imagePath: string;
 
     if (req.file) {
-      imagePath = this.generateImagePath(
-        req.file.filename,
-        req.get('host'),
-        req.protocol,
-      );
+      imagePath = this.generateImagePath(req.file.filename, req.get('host'));
     } else {
       imagePath = updatedItem.imagePath;
     }
@@ -99,12 +94,8 @@ export class OfferService {
     return item;
   }
 
-  private generateImagePath(
-    filename: string,
-    host: string,
-    protocol: string,
-  ): string {
-    const url = `${protocol}://${host}`;
+  private generateImagePath(filename: string, host: string): string {
+    const url = `https://${host}`;
     const path = `${url}/assets/${filename}`;
     return path;
   }

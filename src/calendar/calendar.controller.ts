@@ -20,7 +20,7 @@ export class CalendarController {
   @HttpCode(HttpStatus.OK)
   @Patch()
   async insertPromoItem(@Req() req: Request) {
-    await this.calendarService.updatePromoItem(req);
+    await this.calendarService.updateCalendar(req);
     return true;
   }
 

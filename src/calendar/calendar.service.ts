@@ -10,7 +10,7 @@ export class CalendarService {
     @InjectModel('Calendar') private readonly calendarModel: Model<Calendar>,
   ) {}
 
-  async updatePromoItem(req: Request) {
+  async updateCalendar(req: Request) {
     const updatedItem = await this.findByName(req.body.idItem);
 
     if (updatedItem) {

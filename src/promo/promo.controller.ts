@@ -25,8 +25,6 @@ export class PromoController {
     @UploadedFiles() files: any[],
   ): Promise<{ id: string }> {
     const isExist = await this.promoService.findByName('main_promo');
-    console.log(req);
-    console.log(files);
     if (!isExist) {
       const databaseItemID = await this.promoService.insertPromoItem(
         files,
@@ -47,6 +45,8 @@ export class PromoController {
       text2: promo.text2,
       imagePath1: promo.imagePath1,
       imagePath2: promo.imagePath2,
+      link1: promo.link1,
+      link2: promo.link2,
     };
   }
 }

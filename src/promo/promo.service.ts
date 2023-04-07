@@ -27,6 +27,8 @@ export class PromoService {
       text2: req.body.text2,
       imagePath1: imagePath1,
       imagePath2: imagePath2,
+      link1: req.body.link1,
+      link2: req.body.link2,
     });
     const item = await newPromoItem.save();
     return item.id;
@@ -65,7 +67,8 @@ export class PromoService {
     updatedItem.imagePath2 = req.body.imagePath2
       ? req.body.imagePath2
       : imagePath2;
-
+    updatedItem.link1 = req.body?.link1 || updatedItem.link1;
+    updatedItem.link2 = req.body?.link2 || updatedItem.link2;
     updatedItem.save();
   }
 

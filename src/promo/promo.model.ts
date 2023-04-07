@@ -15,6 +15,10 @@ export class Promo {
   imagePath1: string;
   @Prop()
   imagePath2: string;
+  @Prop()
+  link1: string;
+  @Prop()
+  link2: string;
 }
 
 export const PromoSchema = SchemaFactory.createForClass(Promo);

@@ -19,6 +19,8 @@ export class Promo {
   link1: string;
   @Prop()
   link2: string;
+  @Prop()
+  headerText: string;
 }
 
 export const PromoSchema = SchemaFactory.createForClass(Promo);

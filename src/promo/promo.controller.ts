@@ -47,6 +47,7 @@ export class PromoController {
       imagePath2: promo.imagePath2,
       link1: promo.link1,
       link2: promo.link2,
+      headerText: promo.headerText,
     };
   }
 }

@@ -29,6 +29,7 @@ export class PromoService {
       imagePath2: imagePath2,
       link1: req.body.link1,
       link2: req.body.link2,
+      headerText: req.body.headerText,
     });
     const item = await newPromoItem.save();
     return item.id;
@@ -69,6 +70,7 @@ export class PromoService {
       : imagePath2;
     updatedItem.link1 = req.body?.link1 || updatedItem.link1;
     updatedItem.link2 = req.body?.link2 || updatedItem.link2;
+    updatedItem.headerText = req.body?.headerText || updatedItem.headerText;
     updatedItem.save();
   }
 

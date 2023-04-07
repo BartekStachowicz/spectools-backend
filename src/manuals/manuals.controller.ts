@@ -15,6 +15,7 @@ export class ManualsController {
   @UseInterceptors(FileInterceptor('pdfFile', multerForPdfOptions))
   async insertPromoItem(@Req() req: Request) {
     await this.manualsService.updateManuals(req);
+    return true;
   }
 
   @Get()

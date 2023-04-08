@@ -6,7 +6,7 @@ import { UseGuards, UseInterceptors } from '@nestjs/common/decorators';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtGuard } from '../auth/jwt.guard';
 
-@Controller('manuals')
+@Controller('devicemanuals')
 export class ManualsController {
   constructor(private readonly manualsService: ManualsService) {}
 

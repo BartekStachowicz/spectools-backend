@@ -45,7 +45,7 @@ export class ManualsService {
 
   private generateImagePath(filename: string, host: string): string {
     const url = `https://${host}`;
-    const path = `${url}/manuals/${filename}`;
+    const path = `${url}/devicemanuals/${filename}`;
     return path;
   }
 }
